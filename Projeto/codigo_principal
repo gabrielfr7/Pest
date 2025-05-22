@@ -1,0 +1,168 @@
+# Trabalho de PEST
+
+conjuntos = []  # Lista onde cada item será [nome, lista_de_elementos]
+
+def mostrar_menu():
+    print("--- Construtor de Conjuntos Matemáticos ---")
+    print("1. Criar um novo conjunto")
+    print("2. Adicionar elemento a um conjunto")
+    print("3. Remover elemento de um conjunto")
+    print("4. Mostrar todos os conjuntos")
+    print("5. Apagar um conjunto")
+    print("6. União de dois conjuntos")
+    print("7. Interseção de dois conjuntos")
+    print("0. Sair")
+
+def criar_conjunto():
+    nome = input("Digite o nome do novo conjunto: ")
+    for c in conjuntos:
+        if c[0] == nome:
+            print("Já existe um conjunto com esse nome.")
+            return
+    conjuntos.append([nome, []])
+    print(f"Conjunto {nome} criado.")
+
+def adicionar_elemento():
+    nome = input("Digite o nome do conjunto para adicionar elemento: ")
+    for c in conjuntos:
+        if c[0] == nome:
+            elemento = input("Digite o elemento para adicionar: ")
+            for e in c[1]:
+                if e == elemento:
+                    print("Elemento já está no conjunto.")
+                    return
+            c[1].append(elemento)
+            print(f"Elemento {elemento} adicionado ao conjunto {nome}.")
+            return
+    print("Conjunto não encontrado.")
+
+def remover_elemento():
+    nome = input("Digite o nome do conjunto para remover elemento: ")
+    for c in conjuntos:
+        if c[0] == nome:
+            elemento = input("Digite o elemento para remover: ")
+            for e in c[1]:
+                if e == elemento:
+                    c[1].remove(elemento)
+                    print(f"Elemento '{elemento}' removido do conjunto '{nome}'.")
+                    return
+            print("Elemento não encontrado no conjunto.")
+            return
+    print("Conjunto não encontrado.")
+
+def mostrar_conjuntos():
+    if not conjuntos:
+        print("Nenhum conjunto criado.")
+    else:
+        for c in conjuntos:
+            print(f"Conjunto '{c[0]}': {c[1]}")
+
+def apagar_conjunto():
+    nome = input("Digite o nome do conjunto para apagar: ")
+    global conjuntos
+    novos_conjuntos = []
+    achou = False
+    for c in conjuntos:
+        if c[0] != nome:
+            novos_conjuntos.append(c)
+        else:
+            achou = True
+    conjuntos = novos_conjuntos
+    if achou:
+        print(f"Conjunto '{nome}' apagado.")
+    else:
+        print("Conjunto não encontrado.")
+
+def unir_conjuntos():
+    nome1 = input("Digite o nome do primeiro conjunto: ")
+    nome2 = input("Digite o nome do segundo conjunto: ")
+
+    c1 = []
+    c2 = []
+    encontrou_c1 = 0
+    encontrou_c2 = 0
+
+    for c in conjuntos:
+        if c[0] == nome1:
+            c1 = c[1]
+            encontrou_c1 = 1
+        if c[0] == nome2:
+            c2 = c[1]
+            encontrou_c2 = 1
+
+    if encontrou_c1 == 0 or encontrou_c2 == 0:
+        print("Um ou ambos os conjuntos não foram encontrados.")
+        return
+
+    uniao = []
+    for item in c1:
+        uniao.append(item)
+
+    for item_c2 in c2:
+        existe = 0
+        for item_uniao in uniao:
+            if item_c2 == item_uniao:
+                existe = 1
+        if existe == 0:
+            uniao.append(item_c2)
+
+    print("União dos conjuntos '" + nome1 + "' e '" + nome2 + "':", uniao)
+
+def interseccao_conjuntos():
+    nome1 = input("Digite o nome do primeiro conjunto: ")
+    nome2 = input("Digite o nome do segundo conjunto: ")
+
+    c1 = []
+    c2 = []
+    encontrou_c1 = 0
+    encontrou_c2 = 0
+
+    for c in conjuntos:
+        if c[0] == nome1:
+            c1 = c[1]
+            encontrou_c1 = 1
+        if c[0] == nome2:
+            c2 = c[1]
+            encontrou_c2 = 1
+
+    if encontrou_c1 == 0 or encontrou_c2 == 0:
+        print("Um ou ambos os conjuntos não foram encontrados.")
+        return
+
+    intersecao = []
+    for item_c1 in c1:
+        existe = 0
+        for item_c2 in c2:
+            if item_c1 == item_c2:
+                existe = 1
+        if existe == 1:
+            intersecao.append(item_c1)
+
+    print("Interseção dos conjuntos '" + nome1 + "' e '" + nome2 + "':", intersecao)
+
+def main():
+    while True:
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ")
+        if opcao == '1':
+            criar_conjunto()
+        elif opcao == '2':
+            adicionar_elemento()
+        elif opcao == '3':
+            remover_elemento()
+        elif opcao == '4':
+            mostrar_conjuntos()
+        elif opcao == '5':
+            apagar_conjunto()
+        elif opcao == '6':
+            unir_conjuntos()
+        elif opcao == '7':
+            interseccao_conjuntos()
+        elif opcao == '0':
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()
