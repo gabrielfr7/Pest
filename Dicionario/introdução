@@ -1,0 +1,26 @@
+# DICIONARIOS 
+# Dicionarios são estruturas de dados que armazenam pares do chave-valor.
+# Eles são mutaveis e não ordenados, permitindo acesso rapido aos valores atraves de suas chave.
+# Exemplo de dicionario 
+
+dicionario = {
+    "one" : "um",
+    "two": "dois",
+    "theree": 'tres'
+}
+
+# COMO ACESSAR VALORES DE DICIONARIOS 
+# Não existe indice! Uma vez que não são estruturas ordenadas. As chaves são utilizadas para cosulta de valores.
+
+print(dicionario["two"]) #Um
+print(dicionario["theree"]) # Dois 
+print(dicionario["one"]) # Três
+ 
+# COMO ALTERAR UM VALOR
+# Utilizamos a chave do item para alterar o valor
+dicionario["two"] = 2
+print(dicionario['two']) # 2
+
+# Utilizamos uma nova chave para criar um novo valor
+dicionario ["for"] = "Esse é o numero quatro"  # Criou uma nova chave e adicionou a mesma no DICIONARIO.
+print(dicionario)
